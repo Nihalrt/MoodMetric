@@ -1,16 +1,30 @@
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import matplotlib.pyplot as plt
+import os
 
 # Download required NLTK resources (uncomment the following two lines on the first run)
 # nltk.download('vader_lexicon')
 # nltk.download('punkt')
 
 class SentimentAnalyzer:
+    """
+    A class for analyzing sentiment of text using the VADER sentiment analysis tool.
+    """
     def __init__(self):
         self.sid = SentimentIntensityAnalyzer()
 
     def analyze_sentiment(self, text):
+        """
+        Analyze the sentiment of a given text.
+
+        Args:
+            text (str): The input text to analyze.
+
+        Returns:
+            str: The sentiment label ('Extremely Positive', 'Very Positive', 'Positive',
+                 'Extremely Negative', 'Very Negative', 'Negative', or 'Neutral').
+        """
         sentiment_scores = self.sid.polarity_scores(text)
         compound_score = sentiment_scores['compound']
 
@@ -31,10 +45,22 @@ class SentimentAnalyzer:
 
 
 class SocialMediaAnalyzer:
+    """
+    A class for analyzing social media texts using sentiment analysis.
+    """
     def __init__(self, sentiment_analyzer):
         self.sentiment_analyzer = sentiment_analyzer
 
     def analyze_texts(self, texts):
+        """
+        Analyze a list of texts and return sentiment results for each text.
+
+        Args:
+            texts (list): A list of text strings to analyze.
+
+        Returns:
+            list: A list of tuples, where each tuple contains the text and its sentiment label.
+        """
         results = []
         for text in texts:
             sentiment = self.sentiment_analyzer.analyze_sentiment(text)
@@ -43,16 +69,37 @@ class SocialMediaAnalyzer:
 
 
 class SocialMediaApp:
+    """
+    A social media sentiment analysis application.
+    """
     def __init__(self):
         self.analyzer = SocialMediaAnalyzer(SentimentAnalyzer())
 
     def load_texts(self, file_path):
+        """
+        Load text data from a file.
+
+        Args:
+            file_path (str): The path to the file containing social media texts.
+
+        Returns:
+            list: A list of text strings.
+        """
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"File not found at path: {file_path}")
+
         with open(file_path, 'r') as file:
             texts = file.readlines()
         texts = [text.strip() for text in texts if text.strip()]
         return texts
 
     def display_sentiment_results(self, sentiment_results):
+        """
+        Display sentiment analysis results to the console.
+
+        Args:
+            sentiment_results (list): A list of tuples, where each tuple contains the text and its sentiment label.
+        """
         print("Sentiment Analysis Results:")
         for text, sentiment in sentiment_results:
             print(f"Text: {text}")
@@ -60,6 +107,12 @@ class SocialMediaApp:
             print("-" * 20)
 
     def plot_sentiment_distribution(self, sentiment_results):
+        """
+        Plot the distribution of sentiment labels.
+
+        Args:
+            sentiment_results (list): A list of tuples, where each tuple contains the text and its sentiment label.
+        """
         sentiment_counts = {}
         for _, sentiment in sentiment_results:
             sentiment_counts[sentiment] = sentiment_counts.get(sentiment, 0) + 1
@@ -77,6 +130,13 @@ class SocialMediaApp:
         plt.show()
 
     def save_sentiment_results(self, sentiment_results, output_file):
+        """
+        Save sentiment analysis results to a text file.
+
+        Args:
+            sentiment_results (list): A list of tuples, where each tuple contains the text and its sentiment label.
+            output_file (str): The path to the output file.
+        """
         with open(output_file, 'w') as file:
             for text, sentiment in sentiment_results:
                 file.write(f"Text: {text}\n")
