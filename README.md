@@ -15,7 +15,7 @@ The Social Media Sentiment Analyzer is a Python-based application that leverages
 
 ### Sentiment Analysis
 
-The project employs the VADER sentiment analysis tool to categorize text data into the following sentiment labels:
+The project employs the sentiment analysis tool to categorize text data into the following sentiment labels:
 
 - Extremely Positive
 - Very Positive
