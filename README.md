@@ -1,8 +1,8 @@
-# Social Media Sentiment Analyzer
+# MoodMetrc
 
 ## Overview
 
-The Social Media Sentiment Analyzer is a Python-based application that leverages a sentiment analysis tool to analyze the sentiment of social media text data. It provides insights into whether text content is positive, negative, neutral, or extremely positive/negative. The project includes three main components: a sentiment analysis module, a social media text analyzer, and a user-friendly application to run the analysis.
+A Python-based application that leverages a sentiment analysis tool to analyze the sentiment of social media text data. It provides insights into whether text content is positive, negative, neutral, or extremely positive/negative. The project includes three main components: a sentiment analysis module, a social media text analyzer, and a user-friendly application to run the analysis.
 
 ## Table of Contents
 
