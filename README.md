@@ -1,4 +1,4 @@
-# MoodMetrc
+# MoodMetric
 
 ## Overview
 
